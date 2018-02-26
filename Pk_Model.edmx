@@ -1,0 +1,399 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Pk_DbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Building">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Institution">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="255" />
+          <Property Name="BId" Type="int" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="255" />
+          <Property Name="Telefon" Type="varchar" MaxLength="255" />
+          <Property Name="Mail" Type="varchar" MaxLength="255" />
+          <Property Name="Work" Type="varchar" MaxLength="255" />
+          <Property Name="RoomId" Type="int" />
+        </EntityType>
+        <EntityType Name="PersonInInst">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PersonId" Type="int" Nullable="false" />
+          <Property Name="InstitutionId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Room">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nr" Type="varchar" MaxLength="255" />
+          <Property Name="IId" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Pk_Db.dbo.PersonInInstitutionView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="PersonInInstitutionView">
+          <Key>
+            <PropertyRef Name="PersonId" />
+            <PropertyRef Name="InstitutionId" />
+            <PropertyRef Name="PersonInInstitutionId" />
+            <PropertyRef Name="BuildingId" />
+          </Key>
+          <Property Name="PersonId" Type="int" Nullable="false" />
+          <Property Name="InstitutionId" Type="int" Nullable="false" />
+          <Property Name="RoomId" Type="int" />
+          <Property Name="Work" Type="varchar" MaxLength="255" />
+          <Property Name="Mail" Type="varchar" MaxLength="255" />
+          <Property Name="Telefon" Type="varchar" MaxLength="255" />
+          <Property Name="PersonName" Type="varchar" MaxLength="255" />
+          <Property Name="BuildingName" Type="varchar" MaxLength="255" />
+          <Property Name="PersonInInstitutionId" Type="int" Nullable="false" />
+          <Property Name="InstitutionName" Type="varchar" MaxLength="255" />
+          <Property Name="BuildingId" Type="int" Nullable="false" />
+          <Property Name="RoomNr" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <Association Name="FK__Institution__BId__25869641">
+          <End Role="Building" Type="Self.Building" Multiplicity="0..1" />
+          <End Role="Institution" Type="Self.Institution" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Building">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Institution">
+              <PropertyRef Name="BId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Person__RoomId__32E0915F">
+          <End Role="Room" Type="Self.Room" Multiplicity="0..1" />
+          <End Role="Person" Type="Self.Person" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Room">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Person">
+              <PropertyRef Name="RoomId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PersonInI__Insti__36B12243">
+          <End Role="Institution" Type="Self.Institution" Multiplicity="1" />
+          <End Role="PersonInInst" Type="Self.PersonInInst" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Institution">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PersonInInst">
+              <PropertyRef Name="InstitutionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PersonInI__Perso__35BCFE0A">
+          <End Role="Person" Type="Self.Person" Multiplicity="1" />
+          <End Role="PersonInInst" Type="Self.PersonInInst" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PersonInInst">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Pk_DbModelStoreContainer">
+          <EntitySet Name="Building" EntityType="Self.Building" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Institution" EntityType="Self.Institution" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Person" EntityType="Self.Person" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PersonInInst" EntityType="Self.PersonInInst" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Room" EntityType="Self.Room" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PersonInInstitutionView" EntityType="Self.PersonInInstitutionView" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [PersonInInstitutionView].[PersonId] AS [PersonId], 
+    [PersonInInstitutionView].[InstitutionId] AS [InstitutionId], 
+    [PersonInInstitutionView].[RoomId] AS [RoomId], 
+    [PersonInInstitutionView].[Work] AS [Work], 
+    [PersonInInstitutionView].[Mail] AS [Mail], 
+    [PersonInInstitutionView].[Telefon] AS [Telefon], 
+    [PersonInInstitutionView].[PersonName] AS [PersonName], 
+    [PersonInInstitutionView].[BuildingName] AS [BuildingName], 
+    [PersonInInstitutionView].[PersonInInstitutionId] AS [PersonInInstitutionId], 
+    [PersonInInstitutionView].[InstitutionName] AS [InstitutionName], 
+    [PersonInInstitutionView].[BuildingId] AS [BuildingId], 
+    [PersonInInstitutionView].[RoomNr] AS [RoomNr]
+    FROM [dbo].[PersonInInstitutionView] AS [PersonInInstitutionView]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__Institution__BId__25869641" Association="Self.FK__Institution__BId__25869641">
+            <End Role="Building" EntitySet="Building" />
+            <End Role="Institution" EntitySet="Institution" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Person__RoomId__32E0915F" Association="Self.FK__Person__RoomId__32E0915F">
+            <End Role="Room" EntitySet="Room" />
+            <End Role="Person" EntitySet="Person" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PersonInI__Insti__36B12243" Association="Self.FK__PersonInI__Insti__36B12243">
+            <End Role="Institution" EntitySet="Institution" />
+            <End Role="PersonInInst" EntitySet="PersonInInst" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PersonInI__Perso__35BCFE0A" Association="Self.FK__PersonInI__Perso__35BCFE0A">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="PersonInInst" EntitySet="PersonInInst" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Pk_DbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="PkDbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Buildings" EntityType="Pk_DbModel.Building" />
+          <EntitySet Name="Institutions" EntityType="Pk_DbModel.Institution" />
+          <EntitySet Name="People" EntityType="Pk_DbModel.Person" />
+          <EntitySet Name="PersonInInsts" EntityType="Pk_DbModel.PersonInInst" />
+          <EntitySet Name="Rooms" EntityType="Pk_DbModel.Room" />
+          <EntitySet Name="PersonInInstitutionViews" EntityType="Pk_DbModel.PersonInInstitutionView" />
+          <AssociationSet Name="FK__Institution__BId__25869641" Association="Pk_DbModel.FK__Institution__BId__25869641">
+            <End Role="Building" EntitySet="Buildings" />
+            <End Role="Institution" EntitySet="Institutions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PersonInI__Insti__36B12243" Association="Pk_DbModel.FK__PersonInI__Insti__36B12243">
+            <End Role="Institution" EntitySet="Institutions" />
+            <End Role="PersonInInst" EntitySet="PersonInInsts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Person__RoomId__32E0915F" Association="Pk_DbModel.FK__Person__RoomId__32E0915F">
+            <End Role="Room" EntitySet="Rooms" />
+            <End Role="Person" EntitySet="People" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PersonInI__Perso__35BCFE0A" Association="Pk_DbModel.FK__PersonInI__Perso__35BCFE0A">
+            <End Role="Person" EntitySet="People" />
+            <End Role="PersonInInst" EntitySet="PersonInInsts" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Building">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Institutions" Relationship="Pk_DbModel.FK__Institution__BId__25869641" FromRole="Building" ToRole="Institution" />
+        </EntityType>
+        <EntityType Name="Institution">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="BId" Type="Int32" />
+          <NavigationProperty Name="Building" Relationship="Pk_DbModel.FK__Institution__BId__25869641" FromRole="Institution" ToRole="Building" />
+          <NavigationProperty Name="PersonInInsts" Relationship="Pk_DbModel.FK__PersonInI__Insti__36B12243" FromRole="Institution" ToRole="PersonInInst" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Telefon" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Mail" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Work" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="RoomId" Type="Int32" />
+          <NavigationProperty Name="Room" Relationship="Pk_DbModel.FK__Person__RoomId__32E0915F" FromRole="Person" ToRole="Room" />
+          <NavigationProperty Name="PersonInInsts" Relationship="Pk_DbModel.FK__PersonInI__Perso__35BCFE0A" FromRole="Person" ToRole="PersonInInst" />
+        </EntityType>
+        <EntityType Name="PersonInInst">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PersonId" Type="Int32" Nullable="false" />
+          <Property Name="InstitutionId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Institution" Relationship="Pk_DbModel.FK__PersonInI__Insti__36B12243" FromRole="PersonInInst" ToRole="Institution" />
+          <NavigationProperty Name="Person" Relationship="Pk_DbModel.FK__PersonInI__Perso__35BCFE0A" FromRole="PersonInInst" ToRole="Person" />
+        </EntityType>
+        <EntityType Name="Room">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nr" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="IId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="People" Relationship="Pk_DbModel.FK__Person__RoomId__32E0915F" FromRole="Room" ToRole="Person" />
+        </EntityType>
+        <EntityType Name="PersonInInstitutionView">
+          <Key>
+            <PropertyRef Name="PersonId" />
+            <PropertyRef Name="InstitutionId" />
+            <PropertyRef Name="PersonInInstitutionId" />
+            <PropertyRef Name="BuildingId" />
+          </Key>
+          <Property Name="PersonId" Type="Int32" Nullable="false" />
+          <Property Name="InstitutionId" Type="Int32" Nullable="false" />
+          <Property Name="RoomId" Type="Int32" />
+          <Property Name="Work" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Mail" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Telefon" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="PersonName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="BuildingName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="PersonInInstitutionId" Type="Int32" Nullable="false" />
+          <Property Name="InstitutionName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="BuildingId" Type="Int32" Nullable="false" />
+          <Property Name="RoomNr" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK__Institution__BId__25869641">
+          <End Type="Pk_DbModel.Building" Role="Building" Multiplicity="0..1" />
+          <End Type="Pk_DbModel.Institution" Role="Institution" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Building">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Institution">
+              <PropertyRef Name="BId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PersonInI__Insti__36B12243">
+          <End Type="Pk_DbModel.Institution" Role="Institution" Multiplicity="1" />
+          <End Type="Pk_DbModel.PersonInInst" Role="PersonInInst" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Institution">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PersonInInst">
+              <PropertyRef Name="InstitutionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Person__RoomId__32E0915F">
+          <End Type="Pk_DbModel.Room" Role="Room" Multiplicity="0..1" />
+          <End Type="Pk_DbModel.Person" Role="Person" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Room">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Person">
+              <PropertyRef Name="RoomId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PersonInI__Perso__35BCFE0A">
+          <End Type="Pk_DbModel.Person" Role="Person" Multiplicity="1" />
+          <End Type="Pk_DbModel.PersonInInst" Role="PersonInInst" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PersonInInst">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Pk_DbModelStoreContainer" CdmEntityContainer="PkDbEntities">
+          <EntitySetMapping Name="Buildings">
+            <EntityTypeMapping TypeName="Pk_DbModel.Building">
+              <MappingFragment StoreEntitySet="Building">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Institutions">
+            <EntityTypeMapping TypeName="Pk_DbModel.Institution">
+              <MappingFragment StoreEntitySet="Institution">
+                <ScalarProperty Name="BId" ColumnName="BId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="People">
+            <EntityTypeMapping TypeName="Pk_DbModel.Person">
+              <MappingFragment StoreEntitySet="Person">
+                <ScalarProperty Name="RoomId" ColumnName="RoomId" />
+                <ScalarProperty Name="Work" ColumnName="Work" />
+                <ScalarProperty Name="Mail" ColumnName="Mail" />
+                <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PersonInInsts">
+            <EntityTypeMapping TypeName="Pk_DbModel.PersonInInst">
+              <MappingFragment StoreEntitySet="PersonInInst">
+                <ScalarProperty Name="InstitutionId" ColumnName="InstitutionId" />
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rooms">
+            <EntityTypeMapping TypeName="Pk_DbModel.Room">
+              <MappingFragment StoreEntitySet="Room">
+                <ScalarProperty Name="IId" ColumnName="IId" />
+                <ScalarProperty Name="Nr" ColumnName="Nr" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PersonInInstitutionViews">
+            <EntityTypeMapping TypeName="Pk_DbModel.PersonInInstitutionView">
+              <MappingFragment StoreEntitySet="PersonInInstitutionView">
+                <ScalarProperty Name="RoomNr" ColumnName="RoomNr" />
+                <ScalarProperty Name="BuildingId" ColumnName="BuildingId" />
+                <ScalarProperty Name="InstitutionName" ColumnName="InstitutionName" />
+                <ScalarProperty Name="PersonInInstitutionId" ColumnName="PersonInInstitutionId" />
+                <ScalarProperty Name="BuildingName" ColumnName="BuildingName" />
+                <ScalarProperty Name="PersonName" ColumnName="PersonName" />
+                <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+                <ScalarProperty Name="Mail" ColumnName="Mail" />
+                <ScalarProperty Name="Work" ColumnName="Work" />
+                <ScalarProperty Name="RoomId" ColumnName="RoomId" />
+                <ScalarProperty Name="InstitutionId" ColumnName="InstitutionId" />
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,17 @@
+C:\Users\Sunny\source\repos\Pk_Uppgift\Pk_Uppgift\bin\Debug\Pk_Uppgift.exe.config
+C:\Users\Sunny\source\repos\Pk_Uppgift\Pk_Uppgift\bin\Debug\Pk_Uppgift.exe
+C:\Users\Sunny\source\repos\Pk_Uppgift\Pk_Uppgift\bin\Debug\Pk_Uppgift.pdb
+C:\Users\Sunny\source\repos\Pk_Uppgift\Pk_Uppgift\bin\Debug\EntityFramework.dll
+C:\Users\Sunny\source\repos\Pk_Uppgift\Pk_Uppgift\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Sunny\source\repos\Pk_Uppgift\Pk_Uppgift\bin\Debug\EntityFramework.xml
+C:\Users\Sunny\source\repos\Pk_Uppgift\Pk_Uppgift\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Sunny\source\repos\Pk_Uppgift\Pk_Uppgift\obj\Debug\Pk_Uppgift.csprojResolveAssemblyReference.cache
+C:\Users\Sunny\source\repos\Pk_Uppgift\Pk_Uppgift\obj\Debug\Pk_Uppgift.FindPersonForm.resources
+C:\Users\Sunny\source\repos\Pk_Uppgift\Pk_Uppgift\obj\Debug\Pk_Uppgift.ShowPersonForm.resources
+C:\Users\Sunny\source\repos\Pk_Uppgift\Pk_Uppgift\obj\Debug\Pk_Uppgift.csproj.GenerateResource.Cache
+C:\Users\Sunny\source\repos\Pk_Uppgift\Pk_Uppgift\obj\Debug\Pk_Uppgift.csproj.CoreCompileInputs.cache
+C:\Users\Sunny\source\repos\Pk_Uppgift\Pk_Uppgift\obj\Debug\Pk_Uppgift.exe
+C:\Users\Sunny\source\repos\Pk_Uppgift\Pk_Uppgift\obj\Debug\Pk_Uppgift.pdb
+C:\Users\Sunny\source\repos\Pk_Uppgift\Pk_Uppgift\obj\Debug\Pk_Uppgift.Properties.Resources.resources
+C:\Users\Sunny\source\repos\Pk_Uppgift\Pk_Uppgift\obj\Debug\Pk_Uppgift.Launch.resources
+C:\Users\Sunny\source\repos\Pk_Uppgift\Pk_Uppgift\obj\Debug\Pk_Uppgift.WebService.resources
